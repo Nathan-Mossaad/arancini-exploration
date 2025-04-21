@@ -5,6 +5,7 @@
 #include <memory>
 #include <time.h>
 #include <iostream>
+#include <cstdint>
 
 namespace arancini::runtime::exec {
 class execution_context;

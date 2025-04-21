@@ -25,10 +25,15 @@ target_link_libraries(txlat
 
 # Copy linker script files
 if (DBT_ARCH STREQUAL "X86_64")
-    add_custom_command(TARGET txlat POST_BUILD
-                       COMMAND ${CMAKE_COMMAND} -E copy
-                       ${CMAKE_SOURCE_DIR}/x86_64.exec.lds
-                       $<TARGET_FILE_DIR:txlat>)
+    set(X86_LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/x86_64.exec.lds)
+    if (EXISTS ${X86_LINKER_SCRIPT})
+        add_custom_command(TARGET txlat POST_BUILD
+                           COMMAND ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_SOURCE_DIR}/x86_64.exec.lds
+                           $<TARGET_FILE_DIR:txlat>)
+    else ()
+        message(WARNING "Linker script not found: ${X86_LINKER_SCRIPT}. You will have to generate it docs/linker-script.md")
+    endif ()  # Close the inner if here
 elseif (DBT_ARCH STREQUAL "AARCH64")
     add_custom_command(TARGET txlat POST_BUILD
                        COMMAND ${CMAKE_COMMAND} -E copy
