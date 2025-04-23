@@ -73,7 +73,7 @@ static std::optional<po::variables_map> init_options(int argc,
          "inside this path. Requires to have built the arancini-runtime-static "
          "target. "
          "Default specified by build system.")                             //
-        ("cxx-compiler-path", po::value<std::string>()->default_value("g++"),
+        ("cxx-compiler-path", po::value<std::string>()->default_value("clang"),
          "Path to C++ compiler to use for translated binary")              //
 #else
         ("runtime-lib-path", po::value<std::string>()->required(),
